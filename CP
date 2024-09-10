@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+const char* numberToWords(int num) {
+    const char* words[] = {
+        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", 
+        "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", 
+        "eighteen", "nineteen", "twenty", "twenty one", "twenty two", "twenty three", 
+        "twenty four", "twenty five", "twenty six", "twenty seven", "twenty eight", "twenty nine"
+    };
+    return words[num];
+}
+
+void timeInWords(int h, int m) {
+    if (m == 0) {
+        printf("%s o' clock\n", numberToWords(h));
+    } else if (m == 15) {
+        printf("quarter past %s\n", numberToWords(h));
+    } else if (m == 30) {
+        printf("half past %s\n", numberToWords(h));
+    } else if (m == 45) {
+        printf("quarter to %s\n", numberToWords(h == 12 ? 1 : h + 1));
+    } else if (m < 30) {
+        printf("%s minute%s past %s\n", numberToWords(m), (m == 1 ? "" : "s"), numberToWords(h));
+    } else {
+        printf("%s minute%s to %s\n", numberToWords(60 - m), ((60 - m) == 1 ? "" : "s"), numberToWords(h == 12 ? 1 : h + 1));
+    }
+}
+
+int main() {
+    int h, m;
+    
+    scanf("%d %d", &h, &m);
+    
+    timeInWords(h, m);
+    
+    return 0;
+}
